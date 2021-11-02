@@ -1,11 +1,15 @@
 - name: Download and extract Wordpress archive
   unarchive: src=https://wordpress.org/latest.tar.gz dest=/var/www copy=no
+  become: yes
 
 - name: Remove default site
   file: path=/var/www/html state=absent
+  become: yes
 
 - name: Copy config to remote host
   template: src=wp-config.php.j2 dest=/var/www/wordpress/wp-config.php
+  become: yes
 
 - name: Change permissions
-  file: path=/var/www/wordpress owner="{{ site_owner }}" group="{{ site_group }}" recurse=yes
+  file: path=/var/www/wordpress owner={{ site_owner }} group={{ site_group }} recurse=yes
+  become: yes
