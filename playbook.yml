@@ -1,0 +1,19 @@
+- hosts: all
+  gather_facts: False
+  become: yes
+  tasks:
+   - name: Check for Python
+     raw: test -e /usr/bin/python
+     changed_when: false
+     failed_when: false
+     register: check_python
+   - name: Install Python
+     raw: apt -y update && apt install -y python2-minimal
+     when: check_python.rc != 0
+
+- hosts: wordpress
+  roles:
+    - server
+    - php
+    - mysql
+    - wordpress
