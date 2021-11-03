@@ -1,4 +1,4 @@
 ---
 # tasks file for wordpress
 - include: deploy.yml
-- include: apache_setup.yml
+- include: setup_apache.yml
