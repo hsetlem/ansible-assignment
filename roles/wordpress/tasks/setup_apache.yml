@@ -1,0 +1,14 @@
+- name: Copy default host onto
+  template: src=vhosts/default.conf.j2 dest=/etc/apache2/sites-available/{{ inventory_hostname }}.conf
+  become: yes
+
+- name: Enable Vhosts
+  command: a2ensite {{ inventory_hostname }}.conf
+  become: yes
+  
+- name: Disable Default conf
+  command: a2dissite 000-default.conf
+  become: yes
+  notify:
+    - restart apache
+
