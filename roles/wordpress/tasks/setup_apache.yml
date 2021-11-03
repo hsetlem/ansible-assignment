@@ -1,5 +1,5 @@
 - name: Copy default host onto
-  template: src=vhosts/default.conf.j2 dest=/etc/apache2/sites-available/{{ inventory_hostname }}.conf
+  template: src=default.conf.j2 dest=/etc/apache2/sites-available/{{ inventory_hostname }}.conf
   become: yes
 
 - name: Enable Vhosts
